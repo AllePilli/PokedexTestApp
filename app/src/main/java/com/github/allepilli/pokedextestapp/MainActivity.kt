@@ -8,6 +8,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
@@ -25,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.github.allepilli.pokedextestapp.models.PokemonListEntry
+import com.github.allepilli.pokedextestapp.models.PokemonListViewModel
 import com.github.allepilli.pokedextestapp.ui.theme.*
 
 class MainActivity : ComponentActivity() {
@@ -52,22 +55,7 @@ fun MainContent(content: @Composable () -> Unit) {
 }
 
 @Composable
-fun Pokedex() {
-//    var pokemonList by remember {
-//        mutableStateOf<PokemonList?>(null)
-//    }
-//
-//    CoroutineScope(Dispatchers.IO).launch {
-//        when (val response = PokemonRepository.getPokemonList()) {
-//            is Resource.Success -> {
-//                pokemonList = response.data!!
-//            }
-//            is Resource.Error -> {
-//
-//            }
-//        }
-//    }
-
+fun Pokedex(viewModel: PokemonListViewModel = PokemonListViewModel()) {
     Column(
         modifier = Modifier.padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.Start
@@ -86,15 +74,7 @@ fun Pokedex() {
         TeamAndFavorites()
         Spacer(modifier = Modifier.height(20.dp))
 
-//        Column {
-//            PokedexEntry(
-//                entry = PokemonListEntry(
-//                    imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-//                    name = "Bulbasaur",
-//                    number = 1
-//                ),
-//            )
-//        }
+        PokemonList(viewModel)
     }
 }
 
@@ -238,6 +218,18 @@ fun ColoredTabButton(
                     .fillMaxWidth()
                     .padding(start = 16.dp, bottom = 32.dp),
             )
+        }
+    }
+}
+
+@Composable
+fun PokemonList(viewModel: PokemonListViewModel) {
+    val pokemonList by remember { viewModel.pokemonList }
+
+    LazyColumn(contentPadding = PaddingValues(16.dp)) {
+        items(pokemonList.size) {
+            PokedexEntry(entry = pokemonList[it])
+            Spacer(modifier = Modifier.height(10.dp))
         }
     }
 }
