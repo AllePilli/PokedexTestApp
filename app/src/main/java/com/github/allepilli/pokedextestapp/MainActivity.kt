@@ -65,12 +65,7 @@ fun Pokedex() {
         PokemonSearchField()
         Spacer(modifier = Modifier.height(19.dp))
 
-        Row(
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            ColoredTabButton(title = "Mijn team", backgroundBrush = PurpleGradient)
-            ColoredTabButton(title = "Favorieten", backgroundBrush = GreenGradient)
-        }
+        TeamAndFavorites()
     }
 }
 
@@ -154,12 +149,35 @@ private fun PokemonSearchField() {
 }
 
 @Composable
+fun TeamAndFavorites() {
+    Row(
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        ColoredTabButton(
+            title = "Mijn team",
+            backgroundBrush = PurpleGradient,
+            modifier = Modifier.weight(1f)
+        )
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+        ColoredTabButton(
+            title = "Favorieten",
+            backgroundBrush = GreenGradient,
+            modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+@Composable
 fun ColoredTabButton(
     title: String = "",
-    backgroundBrush: Brush
+    backgroundBrush: Brush,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     Button(
-        modifier = Modifier
+        modifier = modifier
             .size(167.dp, 100.dp)
             .background(backgroundBrush, RoundedCornerShape(10.dp)),
         colors = ButtonDefaults.buttonColors(
@@ -167,7 +185,7 @@ fun ColoredTabButton(
             contentColor = Color.Transparent
         ),
         contentPadding = PaddingValues(0.dp),
-        onClick = { /*TODO*/ },
+        onClick = onClick,
     ) {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -184,6 +202,18 @@ fun ColoredTabButton(
                     contentDescription = "",
                 )
             }
+
+            Text(
+                text = title,
+                fontFamily = SF_Pro_Display,
+                fontWeight = FontWeight.Bold,
+                color = White,
+                fontSize = 18.sp,
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, bottom = 32.dp),
+            )
         }
     }
 }
