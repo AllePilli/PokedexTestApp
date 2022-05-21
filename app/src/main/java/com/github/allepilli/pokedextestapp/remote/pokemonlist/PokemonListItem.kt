@@ -1,4 +1,4 @@
-package com.github.allepilli.pokedextestapp.models.pokemonlist
+package com.github.allepilli.pokedextestapp.remote.pokemonlist
 
 data class PokemonListItem(
     val id: Int,
