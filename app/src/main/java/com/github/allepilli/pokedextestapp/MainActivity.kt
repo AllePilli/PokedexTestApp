@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -14,7 +15,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -22,6 +22,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.SubcomposeAsyncImage
+import coil.request.ImageRequest
+import com.github.allepilli.pokedextestapp.models.PokemonListEntry
 import com.github.allepilli.pokedextestapp.ui.theme.*
 
 class MainActivity : ComponentActivity() {
@@ -50,6 +53,21 @@ fun MainContent(content: @Composable () -> Unit) {
 
 @Composable
 fun Pokedex() {
+//    var pokemonList by remember {
+//        mutableStateOf<PokemonList?>(null)
+//    }
+//
+//    CoroutineScope(Dispatchers.IO).launch {
+//        when (val response = PokemonRepository.getPokemonList()) {
+//            is Resource.Success -> {
+//                pokemonList = response.data!!
+//            }
+//            is Resource.Error -> {
+//
+//            }
+//        }
+//    }
+
     Column(
         modifier = Modifier.padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.Start
@@ -66,6 +84,17 @@ fun Pokedex() {
         Spacer(modifier = Modifier.height(19.dp))
 
         TeamAndFavorites()
+        Spacer(modifier = Modifier.height(20.dp))
+
+//        Column {
+//            PokedexEntry(
+//                entry = PokemonListEntry(
+//                    imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+//                    name = "Bulbasaur",
+//                    number = 1
+//                ),
+//            )
+//        }
     }
 }
 
@@ -176,16 +205,11 @@ fun ColoredTabButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
-    Button(
+    Box (
         modifier = modifier
             .size(167.dp, 100.dp)
-            .background(backgroundBrush, RoundedCornerShape(10.dp)),
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = Color.Transparent,
-            contentColor = Color.Transparent
-        ),
-        contentPadding = PaddingValues(0.dp),
-        onClick = onClick,
+            .background(backgroundBrush, RoundedCornerShape(10.dp))
+            .clickable { onClick() },
     ) {
         Box(
             modifier = Modifier.fillMaxSize()
@@ -213,6 +237,50 @@ fun ColoredTabButton(
                     .align(Alignment.BottomStart)
                     .fillMaxWidth()
                     .padding(start = 16.dp, bottom = 32.dp),
+            )
+        }
+    }
+}
+
+@Composable
+fun PokedexEntry(entry: PokemonListEntry) {
+    val number = entry.number.toString()
+    val missingZeroes = 3 - number.length
+    val displayNumber = "0".repeat(missingZeroes) + number
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = White, shape = RoundedCornerShape(10.dp))
+            .clickable { /* TODO */ },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
+    ) {
+        SubcomposeAsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(entry.imageUrl)
+                .build(),
+            contentDescription = entry.name,
+            loading = {
+                CircularProgressIndicator()
+            },
+            modifier = Modifier
+                .size(75.dp),
+        )
+
+        Column(
+            horizontalAlignment = Alignment.Start,
+        ) {
+            Text(
+                text = entry.name,
+                fontFamily = SF_Pro_Display,
+                fontWeight = FontWeight.Bold,
+            )
+
+            Text(
+                text = "Nr. $displayNumber",
+                fontFamily = SF_Pro_Display,
+                fontWeight = FontWeight.Normal
             )
         }
     }
