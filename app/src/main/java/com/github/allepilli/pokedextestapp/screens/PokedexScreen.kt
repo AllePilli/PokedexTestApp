@@ -20,6 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.github.allepilli.pokedextestapp.R
@@ -27,9 +29,13 @@ import com.github.allepilli.pokedextestapp.models.PokemonListEntry
 import com.github.allepilli.pokedextestapp.models.PokemonListViewModel
 import com.github.allepilli.pokedextestapp.models.paddedNumber
 import com.github.allepilli.pokedextestapp.ui.theme.*
+import com.github.allepilli.pokedextestapp.util.Constants.POKEMON_DETAIL_SCREEN
 
 @Composable
-fun Pokedex(viewModel: PokemonListViewModel = PokemonListViewModel()) {
+fun Pokedex(
+    viewModel: PokemonListViewModel = PokemonListViewModel(),
+    navController: NavHostController,
+) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -52,7 +58,7 @@ fun Pokedex(viewModel: PokemonListViewModel = PokemonListViewModel()) {
             TeamAndFavorites()
             Spacer(modifier = Modifier.height(20.dp))
 
-            PokemonList(viewModel)
+            PokemonList(viewModel, navController)
         }
     }
 }
@@ -202,24 +208,32 @@ fun ColoredTabButton(
 }
 
 @Composable
-fun PokemonList(viewModel: PokemonListViewModel) {
+fun PokemonList(
+    viewModel: PokemonListViewModel,
+    navController: NavHostController,
+) {
     val pokemonList by remember { viewModel.pokemonList }
 
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
         items(pokemonList.size) {
-            PokedexEntry(entry = pokemonList[it])
+            PokedexEntry(entry = pokemonList[it], navController)
             Spacer(modifier = Modifier.height(10.dp))
         }
     }
 }
 
 @Composable
-fun PokedexEntry(entry: PokemonListEntry) {
+fun PokedexEntry(
+    entry: PokemonListEntry,
+    navController: NavHostController,
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = White, shape = RoundedCornerShape(10.dp))
-            .clickable { /* TODO */ },
+            .clickable {
+                navController.navigate("$POKEMON_DETAIL_SCREEN/${entry.name}")
+            },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {
@@ -256,5 +270,5 @@ fun PokedexEntry(entry: PokemonListEntry) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
-    Pokedex()
+    Pokedex(navController = rememberNavController())
 }

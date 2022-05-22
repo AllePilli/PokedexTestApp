@@ -5,15 +5,18 @@
       <map>
         <entry key="..\:/Users/Allesio/AndroidStudioProjects/Courses/PokedexTestApp/app/src/debug/res/drawable-anydpi/ic_filter.xml" value="0.278" />
         <entry key="..\:/Users/Allesio/AndroidStudioProjects/Courses/PokedexTestApp/app/src/main/java/com/github/allepilli/pokedextestapp/MainActivity.kt" value="0.3071729957805907" />
+        <entry key="..\:/Users/Allesio/AndroidStudioProjects/Courses/PokedexTestApp/app/src/main/java/com/github/allepilli/pokedextestapp/screens/PokedexScreen.kt" value="0.33" />
+        <entry key="..\:/Users/Allesio/AndroidStudioProjects/Courses/PokedexTestApp/app/src/main/java/com/github/allepilli/pokedextestapp/screens/PokemonDetailScreen.kt" value="0.3071729957805907" />
         <entry key="..\:/Users/Allesio/AndroidStudioProjects/Courses/PokedexTestApp/app/src/main/res/drawable/filter.xml" value="0.278" />
         <entry key="..\:/Users/Allesio/AndroidStudioProjects/Courses/PokedexTestApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2685" />
+        <entry key="..\:/Users/Allesio/AndroidStudioProjects/Courses/PokedexTestApp/app/src/main/res/drawable/ic_magnifyingglass.xml" value="0.186" />
         <entry key="..\:/Users/Allesio/AndroidStudioProjects/Courses/PokedexTestApp/app/src/main/res/font/sfprodisplay.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Allesio/AndroidStudioProjects/Courses/PokedexTestApp/app/src/main/res/layout/filter.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/Allesio/AndroidStudioProjects/Courses/PokedexTestApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2685" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
