@@ -10,12 +10,18 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.github.allepilli.pokedextestapp.models.PokemonDetailViewModel
 
 @Composable
 fun PokemonDetailScreen(identifier: String) {
+    val viewModel = PokemonDetailViewModel()
+    val pokemon by remember { viewModel.pokemon }
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
