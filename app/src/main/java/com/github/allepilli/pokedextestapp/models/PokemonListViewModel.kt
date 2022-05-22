@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 
 class PokemonListViewModel: ViewModel() {
     var pokemonList = mutableStateOf<List<PokemonListEntry>>(listOf())
+    var showableList = mutableStateOf<List<PokemonListEntry>>(listOf())
 
     init {
         loadPokemon()
@@ -27,11 +28,25 @@ class PokemonListViewModel: ViewModel() {
                         )
                     }
 
+                    showableList.value = pokemonListEntries
                     pokemonList.value = pokemonListEntries
                 }
                 is Resource.Error -> {
                     /* TODO */
                 }
+            }
+        }
+    }
+
+    fun searchPokemon(searchText: String) {
+        val lowerCaseSearchText = searchText.lowercase()
+
+        if (searchText.isEmpty() || searchText.isBlank()) {
+            showableList.value = pokemonList.value
+        } else {
+            showableList.value = pokemonList.value.filter {
+                it.name.lowercase().contains(lowerCaseSearchText)
+                        || it.paddedNumber.contains(lowerCaseSearchText)
             }
         }
     }
