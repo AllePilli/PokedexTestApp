@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
@@ -263,6 +264,17 @@ private fun PokedexEntry(
                 fontFamily = SF_Pro_Display,
                 fontWeight = FontWeight.Normal
             )
+        }
+
+        LazyRow(
+            modifier = Modifier
+                .weight(1f),
+            verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.End
+        ) {
+            items(count = entry.types.size) {
+                PokemonType(type = entry.types[it])
+            }
         }
     }
 }

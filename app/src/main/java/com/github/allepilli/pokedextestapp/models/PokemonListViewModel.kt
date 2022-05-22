@@ -22,7 +22,8 @@ class PokemonListViewModel: ViewModel() {
                         PokemonListEntry(
                             imageUrl = pokemonListItem.sprites.front_default,
                             name = pokemonListItem.name.replaceFirstChar(Char::uppercaseChar),
-                            number = pokemonListItem.id
+                            number = pokemonListItem.id,
+                            types = pokemonListItem.types
                         )
                     }
 
