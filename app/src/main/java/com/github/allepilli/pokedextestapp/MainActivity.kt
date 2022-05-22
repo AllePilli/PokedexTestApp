@@ -9,7 +9,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
@@ -28,6 +27,7 @@ import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.github.allepilli.pokedextestapp.models.PokemonListEntry
 import com.github.allepilli.pokedextestapp.models.PokemonListViewModel
+import com.github.allepilli.pokedextestapp.models.paddedNumber
 import com.github.allepilli.pokedextestapp.ui.theme.*
 
 class MainActivity : ComponentActivity() {
@@ -236,10 +236,6 @@ fun PokemonList(viewModel: PokemonListViewModel) {
 
 @Composable
 fun PokedexEntry(entry: PokemonListEntry) {
-    val number = entry.number.toString()
-    val missingZeroes = 3 - number.length
-    val displayNumber = "0".repeat(missingZeroes) + number
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -270,7 +266,7 @@ fun PokedexEntry(entry: PokemonListEntry) {
             )
 
             Text(
-                text = "Nr. $displayNumber",
+                text = "Nr. ${entry.paddedNumber}",
                 fontFamily = SF_Pro_Display,
                 fontWeight = FontWeight.Normal
             )
