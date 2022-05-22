@@ -21,7 +21,7 @@ class PokemonListViewModel: ViewModel() {
                     val pokemonListEntries = result.data!!.toList().map { pokemonListItem ->
                         PokemonListEntry(
                             imageUrl = pokemonListItem.sprites.front_default,
-                            name = pokemonListItem.name,
+                            name = pokemonListItem.name.replaceFirstChar(Char::uppercaseChar),
                             number = pokemonListItem.id
                         )
                     }

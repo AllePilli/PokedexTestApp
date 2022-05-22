@@ -42,7 +42,10 @@ class MainActivity : ComponentActivity() {
                             it.arguments?.getString("identifier") ?: ""
                         }
 
-                        PokemonDetailScreen(identifier = identifier)
+                        PokemonDetailScreen(
+                            navController = navController,
+                            identifier = identifier
+                        )
                     }
                 }
             }
