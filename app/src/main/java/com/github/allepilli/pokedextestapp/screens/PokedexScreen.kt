@@ -64,7 +64,7 @@ fun Pokedex(
 }
 
 @Composable
-fun TopBar() {
+private fun TopBar() {
     val context = LocalContext.current
 
     Row(
@@ -143,7 +143,7 @@ private fun PokemonSearchField() {
 }
 
 @Composable
-fun TeamAndFavorites() {
+private fun TeamAndFavorites() {
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
@@ -164,7 +164,7 @@ fun TeamAndFavorites() {
 }
 
 @Composable
-fun ColoredTabButton(
+private fun ColoredTabButton(
     title: String = "",
     backgroundBrush: Brush,
     modifier: Modifier = Modifier,
@@ -208,7 +208,7 @@ fun ColoredTabButton(
 }
 
 @Composable
-fun PokemonList(
+private fun PokemonList(
     viewModel: PokemonListViewModel,
     navController: NavHostController,
 ) {
@@ -223,7 +223,7 @@ fun PokemonList(
 }
 
 @Composable
-fun PokedexEntry(
+private fun PokedexEntry(
     entry: PokemonListEntry,
     navController: NavHostController,
 ) {
