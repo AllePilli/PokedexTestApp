@@ -1,6 +1,7 @@
 package com.github.allepilli.pokedextestapp.controllers
 
 import com.github.allepilli.pokedextestapp.remote.PokemonApi
+import com.github.allepilli.pokedextestapp.remote.pokemondetail.PokemonDetail
 import com.github.allepilli.pokedextestapp.remote.pokemonlist.PokemonList
 import com.github.allepilli.pokedextestapp.util.Constants.BASE_URL
 import com.github.allepilli.pokedextestapp.util.Resource
@@ -18,7 +19,17 @@ object PokemonRepository {
         val response = try {
             api.getPokemonList()
         } catch (e: Exception) {
-            return Resource.Error(message = "An unknown error occured.")
+            return Resource.Error(message = "An unknown error occurred.")
+        }
+
+        return Resource.Success(response)
+    }
+
+    suspend fun getPokemon(identifier: String): Resource<PokemonDetail> {
+        val response = try {
+            api.getPokemon(identifier)
+        } catch (e: Exception) {
+            return Resource.Error(message = "An unknown error occurred.")
         }
 
         return Resource.Success(response)
