@@ -1,8 +1,8 @@
 package com.github.allepilli.pokedextestapp.controllers
 
 import com.github.allepilli.pokedextestapp.remote.PokemonApi
-import com.github.allepilli.pokedextestapp.remote.pokemondetail.PokemonDetail
-import com.github.allepilli.pokedextestapp.remote.pokemonlist.PokemonList
+import com.github.allepilli.pokedextestapp.remote.responsetypes.PokemonDetail
+import com.github.allepilli.pokedextestapp.remote.responsetypes.PokemonList
 import com.github.allepilli.pokedextestapp.util.Constants.BASE_URL
 import com.github.allepilli.pokedextestapp.util.Resource
 import retrofit2.Retrofit

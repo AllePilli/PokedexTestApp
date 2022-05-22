@@ -1,4 +1,4 @@
-package com.github.allepilli.pokedextestapp.remote.pokemondetail
+package com.github.allepilli.pokedextestapp.remote.responsetypes
 
 data class Ability(
     val ability: AbilityX,

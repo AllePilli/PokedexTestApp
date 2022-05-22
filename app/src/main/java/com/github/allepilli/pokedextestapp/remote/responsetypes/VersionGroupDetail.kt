@@ -1,4 +1,4 @@
-package com.github.allepilli.pokedextestapp.remote.pokemondetail
+package com.github.allepilli.pokedextestapp.remote.responsetypes
 
 data class VersionGroupDetail(
     val level_learned_at: Int,

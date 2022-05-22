@@ -1,4 +1,4 @@
-package com.github.allepilli.pokedextestapp.remote.pokemonlist
+package com.github.allepilli.pokedextestapp.remote.responsetypes
 
 data class PokemonListItem(
     val id: Int,
