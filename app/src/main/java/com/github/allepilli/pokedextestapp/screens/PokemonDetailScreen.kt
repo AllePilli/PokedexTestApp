@@ -2,6 +2,8 @@ package com.github.allepilli.pokedextestapp.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronLeft
@@ -21,7 +23,9 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.github.allepilli.pokedextestapp.models.PokemonDetailViewModel
+import com.github.allepilli.pokedextestapp.models.paddedNumber
 import com.github.allepilli.pokedextestapp.ui.theme.Dark1
+import com.github.allepilli.pokedextestapp.ui.theme.Grey2
 import com.github.allepilli.pokedextestapp.ui.theme.SF_Pro_Display
 
 @Composable
@@ -74,6 +78,89 @@ fun PokemonDetailScreen(navController: NavHostController, identifier: String) {
                     modifier = Modifier
                         .size(200.dp),
                 )
+            }
+
+            Spacer(modifier = Modifier.height(40.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Start
+            ) {
+                Text(
+                    text = "ABOUT",
+                    fontFamily = SF_Pro_Display,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
+                    color = Dark1
+                )
+            }
+            Spacer(modifier = Modifier.height(7.dp))
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        color = Grey2,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+            ) {
+                TextTableRow(text = "Type") {
+                    LazyRow(
+                        modifier = Modifier
+                            .weight(1f),
+                        verticalAlignment = Alignment.Top,
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        items(count = pokemon.types.size) {
+                            PokemonType(type = pokemon.types[it])
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(18.dp))
+
+                TextTableRow(text = "Nummer") {
+                    Text(
+                        text = pokemon.paddedNumber,
+                        fontFamily = SF_Pro_Display,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Dark1
+                    )
+                }
+
+                TextTableRow(text = "Hoogte") {
+                    Text(
+                        text = "${pokemon.height}m",
+                        fontFamily = SF_Pro_Display,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Dark1
+                    )
+                }
+
+                TextTableRow(text = "Gewicht") {
+                    Text(
+                        text = "${pokemon.weight} kg",
+                        fontFamily = SF_Pro_Display,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Dark1
+                    )
+                }
+
+                TextTableRow(text = "Vaardigheden") {
+                    val text = pokemon.abilities.joinToString(separator = ", ") {
+                        it.ability.name
+                    }
+
+                    Text(
+                        text = text,
+                        fontFamily = SF_Pro_Display,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Dark1
+                    )
+                }
             }
         }
     }
